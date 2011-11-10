@@ -1,4 +1,8 @@
 LocalHeroes::Application.routes.draw do
+  get "static/home"
+
+  root :to => 'static#home'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
