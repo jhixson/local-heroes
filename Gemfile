@@ -17,6 +17,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'will_paginate', '~> 3.0'
+gem 'authlogic'
+gem 'RedCloth', '>= 4.2.8'
+gem 'delayed_job'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -25,7 +29,7 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
