@@ -23,11 +23,16 @@ class LocationsController < ApplicationController
 
   # GET /locations/pittsburgh
   def find_by_city
-    @location = Location.find_by_slug(params[:city])
+    @location = Location.find_all_by_slug(params[:city])
 
     respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @location }
+      if @location.size == 1
+        @location = @location.first
+        format.html { render :show }
+        format.json { render json: @location }
+      else
+        format.html { render 'multiple' }
+      end
     end
   end
 

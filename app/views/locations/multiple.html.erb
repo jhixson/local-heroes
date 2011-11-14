@@ -1,0 +1,8 @@
+<h2>Did you mean...</h2>
+<% @location.each do |location| %>
+<p>
+  <%= link_to "#{location.city}, #{location.state} #{location.zip}", location_path(location) %>
+</p>
+<% end %>
+
+<%= link_to 'Back', locations_path %>
