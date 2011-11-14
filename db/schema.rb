@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111113165711) do
+ActiveRecord::Schema.define(:version => 20111114185841) do
 
   create_table "locations", :force => true do |t|
     t.string   "city"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20111113165711) do
     t.string   "zip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
 end

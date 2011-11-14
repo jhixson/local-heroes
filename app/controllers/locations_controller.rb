@@ -21,9 +21,9 @@ class LocationsController < ApplicationController
     end
   end
 
-  # GET /locations/Pittsburgh
+  # GET /locations/pittsburgh
   def find_by_city
-    @location = Location.find_by_city(params[:city])
+    @location = Location.find_by_slug(params[:city])
 
     respond_to do |format|
       format.html { render :show }
@@ -31,9 +31,9 @@ class LocationsController < ApplicationController
     end
   end
 
-  # GET /locations/PA/Pittsburgh
+  # GET /locations/PA/pittsburgh
   def find_by_state_and_city
-    @location = Location.find_by_state_and_city(params[:state], params[:city])
+    @location = Location.find_by_state_and_slug(params[:state], params[:city])
 
     respond_to do |format|
       format.html { render :show }

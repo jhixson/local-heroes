@@ -5,7 +5,7 @@ LocalHeroes::Application.routes.draw do
   match '/:zip' => 'locations#find_by_zip', :constraints => {:zip => /\d{5}/}
   match '/*a/:zip' => 'locations#find_by_zip', :constraints => {:zip => /\d{5}/}
   match '/:city' => 'locations#find_by_city', :constraints => {:city => /[\w-]+/}
-  match '/:state/:city' => 'locations#find_by_state_and_city', :constraints => {:state => /\[a-zA-Z]{2}/, :city => /[\w-]+/}
+  match '/:state/:city' => 'locations#find_by_state_and_city', :constraints => {:state => /[a-zA-Z]{2}/, :city => /[\w-]+/}
 
   root :to => 'static#home'
 
