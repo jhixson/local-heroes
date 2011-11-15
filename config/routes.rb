@@ -1,11 +1,20 @@
 LocalHeroes::Application.routes.draw do
+  resources :users
+
   resources :locations
 
+  controller :user_sessions do
+    get 'login' => :new
+    post 'login' => :create
+    get 'logout' => :destroy
+    delete 'logout' => :destroy
+  end
+
   get 'static/home'
-  match '/:zip' => 'locations#find_by_zip', :constraints => {:zip => /\d{5}/}
-  match '/*a/:zip' => 'locations#find_by_zip', :constraints => {:zip => /\d{5}/}
-  match '/:city' => 'locations#find_by_city', :constraints => {:city => /[\w-]+/}
-  match '/:state/:city' => 'locations#find_by_state_and_city', :constraints => {:state => /[a-zA-Z]{2}/, :city => /[\w-]+/}
+  match ':zip' => 'locations#find_by_zip', :constraints => {:zip => /\d{5}/}
+  match '*a/:zip' => 'locations#find_by_zip', :constraints => {:zip => /\d{5}/}
+  match ':city' => 'locations#find_by_city', :constraints => {:city => /[\w-]+/}
+  match ':state/:city' => 'locations#find_by_state_and_city', :constraints => {:state => /[a-zA-Z]{2}/, :city => /[\w-]+/}
 
   root :to => 'static#home'
 
