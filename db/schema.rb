@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111115140432) do
+ActiveRecord::Schema.define(:version => 20111117032253) do
 
   create_table "locations", :force => true do |t|
     t.string   "city"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20111115140432) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+  end
+
+  create_table "replies", :force => true do |t|
+    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sessions", :force => true do |t|
@@ -31,6 +39,14 @@ ActiveRecord::Schema.define(:version => 20111115140432) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "topics", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login"

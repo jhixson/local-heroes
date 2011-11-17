@@ -1,4 +1,8 @@
 LocalHeroes::Application.routes.draw do
+  resources :replies
+
+  resources :topics
+
   resources :users
 
   resources :locations
