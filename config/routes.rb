@@ -1,5 +1,7 @@
 LocalHeroes::Application.routes.draw do
   resources :replies
+  get 'topics/:id/reply' => 'topics#reply', :as => :reply
+  put 'topics/:id/post_reply' => 'topics#post_reply', :as => :post_reply
 
   resources :topics
 

@@ -1,4 +1,7 @@
 class TopicsController < ApplicationController
+
+  before_filter :require_user, :except => [:index, :show]
+
   # GET /topics
   # GET /topics.json
   def index
@@ -37,11 +40,25 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
   end
 
+  # GET /topics/1/reply
+  def reply
+    @topic = Topic.find(params[:id])
+    @topic.replies.build
+  end
+
+  # POST /topics/1/post_reply
+  def post_reply
+    #@reply = Reply.new(params[:topic][:reply])
+    @topic = Topic.find(params[:id])
+    @topic.update_attributes(params[:topic])
+    render :show
+  end
+
   # POST /topics
   # POST /topics.json
   def create
     @topic = Topic.new(params[:topic])
-
+    @topic.user_id = @current_user.id
     respond_to do |format|
       if @topic.save
         format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
