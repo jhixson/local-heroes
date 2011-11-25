@@ -21,6 +21,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'authlogic'
 gem 'RedCloth', '>= 4.2.8'
 gem 'delayed_job'
+gem 'thumbs_up'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
