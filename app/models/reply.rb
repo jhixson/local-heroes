@@ -1,6 +1,7 @@
 class Reply < ActiveRecord::Base
   belongs_to :topic
   belongs_to :user
+  acts_as_voteable
 
   before_save :set_user
 

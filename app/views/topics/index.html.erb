@@ -2,9 +2,12 @@
 
 <table>
   <tr>
+    <th></th>
+    <th></th>
     <th>User</th>
     <th>Title</th>
     <th>Content</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,11 +15,14 @@
 
 <% @topics.each do |topic| %>
   <tr>
+    <td><%= link_to 'Vote Up', vote_up_topic_path(topic), :remote => true, :method => :post %></td>
+    <td><%= link_to 'Vote Down', vote_down_topic_path(topic), :remote => true, :method => :post %></td>
     <td><%= topic.user_id %></td>
     <td><%= topic.title %></td>
     <td><%= topic.content %></td>
     <td><%= link_to 'Show', topic %></td>
     <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
+    <td><%= link_to 'Reply', reply_path(topic) %></td>
     <td><%= link_to 'Destroy', topic, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>

@@ -46,12 +46,32 @@ class TopicsController < ApplicationController
     @topic.replies.build
   end
 
-  # POST /topics/1/post_reply
+  # PUT /topics/1/post_reply
   def post_reply
     #@reply = Reply.new(params[:topic][:reply])
     @topic = Topic.find(params[:id])
     @topic.update_attributes(params[:topic])
     render :show
+  end
+
+  # POST /topics/1/vote_up
+  def vote_up
+    @topic = Topic.find(params[:id])
+    @current_user.vote_exclusively_for(@topic)
+    respond_to do |format|
+      format.html { redirect_to @topic }
+      format.js { render :nothing => true }
+    end
+  end
+
+  # POST /topics/1/vote_down
+  def vote_down
+    @topic = Topic.find(params[:id])
+    @current_user.vote_exclusively_against(@topic)
+    respond_to do |format|
+      format.html { redirect_to @topic }
+      format.js { render :nothing => true }
+    end
   end
 
   # POST /topics
