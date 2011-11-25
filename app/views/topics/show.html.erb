@@ -1,25 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @topic.user_id %>
-</p>
+<h2><%= @topic.title %> (<%= @topic.plusminus %>)</h2>
+<%= RedCloth.new(@topic.content).to_html.html_safe %>
 
-<p>
-  <b>Title:</b>
-  <%= @topic.title %>
-</p>
+<% @replies.each do |reply| %>
+  <blockquote class="comment">
+    <%= RedCloth.new(reply.content).to_html.html_safe %>
+  </blockquote>
+<% end %>
 
-<p>
-  <b>Content:</b>
-  <%= @topic.content %>
-</p>
-
-<p>
-  <b>Votes:</b>
-  <%= @topic.plusminus %>
-</p>
-
+<%= form_for @reply do |f| %>
+  <%= hidden_field :reply, :topic_id, { :value => @topic.id } %>
+  <div class="field">
+    <%= f.label :content, "Your reply" %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_topic_path(@topic) %> |
 <%= link_to 'Back', topics_path %>

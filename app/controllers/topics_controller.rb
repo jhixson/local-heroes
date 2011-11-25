@@ -17,6 +17,8 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @topic = Topic.find(params[:id])
+    @replies = Reply.find_all_by_topic_id(@topic.id)
+    @reply = Reply.new
 
     respond_to do |format|
       format.html # show.html.erb
