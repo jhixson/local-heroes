@@ -1,11 +1,14 @@
 LocalHeroes::Application.routes.draw do
   resources :replies
+  post 'replies/:id/vote_up' => 'replies#vote_up', :as => :vote_up_reply
+  post 'replies/:id/vote_down' => 'replies#vote_down', :as => :vote_down_reply
+
+  resources :topics
   get 'topics/:id/reply' => 'topics#reply', :as => :reply
   put 'topics/:id/post_reply' => 'topics#post_reply', :as => :post_reply
   post 'topics/:id/vote_up' => 'topics#vote_up', :as => :vote_up_topic
   post 'topics/:id/vote_down' => 'topics#vote_down', :as => :vote_down_topic
-
-  resources :topics
+  get 'topics/:id/:slug' => 'topics#show'
 
   resources :users
 

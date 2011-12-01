@@ -1,5 +1,5 @@
 class RepliesController < ApplicationController
-  before_filter :require_user, :only => [:create, :update, :destroy]
+  before_filter :require_user, :except => [:index, :show]
   # GET /replies
   # GET /replies.json
   def index
@@ -69,6 +69,26 @@ class RepliesController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @reply.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /replies/1/vote_up
+  def vote_up
+    @reply = Reply.find(params[:id])
+    @current_user.vote_exclusively_for(@reply)
+    respond_to do |format|
+      format.html { redirect_to @reply }
+      format.js { render :nothing => true }
+    end
+  end
+
+  # POST /replies/1/vote_down
+  def vote_down
+    @reply = Reply.find(params[:id])
+    @current_user.vote_exclusively_against(@reply)
+    respond_to do |format|
+      format.html { redirect_to @reply }
+      format.js { render :nothing => true }
     end
   end
 

@@ -83,6 +83,7 @@ class TopicsController < ApplicationController
     @topic.user_id = @current_user.id
     respond_to do |format|
       if @topic.save
+        @current_user.vote_exclusively_for(@topic)
         format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
         format.json { render json: @topic, status: :created, location: @topic }
       else

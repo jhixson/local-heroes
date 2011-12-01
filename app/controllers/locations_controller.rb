@@ -14,6 +14,7 @@ class LocationsController < ApplicationController
   # GET /locations/1.json
   def show
     @location = Location.find(params[:id])
+    @topics = Topic.find_all_by_location_id(@location.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,6 +29,8 @@ class LocationsController < ApplicationController
     respond_to do |format|
       if @location.size == 1
         @location = @location.first
+        @topics = Topic.find_all_by_location_id(@location.id)
+
         format.html { render :show }
         format.json { render json: @location }
       else
@@ -38,7 +41,9 @@ class LocationsController < ApplicationController
 
   # GET /locations/PA/pittsburgh
   def find_by_state_and_city
+    params[:state].upcase!
     @location = Location.find_by_state_and_slug(params[:state], params[:city])
+    @topics = Topic.find_all_by_location_id(@location.id)
 
     respond_to do |format|
       format.html { render :show }
@@ -49,6 +54,7 @@ class LocationsController < ApplicationController
   # GET /locations/PA/15601
   def find_by_zip
     @location = Location.find_by_zip(params[:zip])
+    @topics = Topic.find_all_by_location_id(@location.id)
 
     respond_to do |format|
       format.html { render :show }
